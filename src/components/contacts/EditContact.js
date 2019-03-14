@@ -4,8 +4,6 @@ import TextInputGroup from "../layout/TextInputGroup";
 import axios from "axios";
 
 class EditContact extends Component {
-  _isMounted = false;
-
   state = {
     name: "",
     email: "",
@@ -14,8 +12,6 @@ class EditContact extends Component {
   };
 
   async componentDidMount() {
-    this._isMounted = true;
-
     const { id } = this.props.match.params;
     const res = await axios.get(
       `https://jsonplaceholder.typicode.com/users/${id}`
@@ -77,10 +73,6 @@ class EditContact extends Component {
 
     this.props.history.push("/");
   };
-
-  // componentWillUnmount() {
-  //   this._isMounted = false;
-  // }
 
   render() {
     const { name, email, phone, errors } = this.state;
