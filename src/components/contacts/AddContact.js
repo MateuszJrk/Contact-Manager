@@ -87,6 +87,7 @@ class AddContact extends Component {
                   <TextInputGroup
                     label="Phone"
                     name="phone"
+                    type="number"
                     placeholder="Enter Phone..."
                     value={phone}
                     onChange={this.onChange}
