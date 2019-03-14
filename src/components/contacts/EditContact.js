@@ -78,9 +78,9 @@ class EditContact extends Component {
     this.props.history.push("/");
   };
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+  // componentWillUnmount() {
+  //   this._isMounted = false;
+  // }
 
   render() {
     const { name, email, phone, errors } = this.state;
