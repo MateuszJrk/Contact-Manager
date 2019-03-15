@@ -16,21 +16,6 @@ class AddContact extends Component {
 
     const { name, email, phone } = this.state;
 
-    if (name === "") {
-      this.setState({ errors: { name: "Name is required" } });
-      return;
-    }
-
-    if (email === "") {
-      this.setState({ errors: { email: "Email is required" } });
-      return;
-    }
-
-    if (phone === "") {
-      this.setState({ errors: { phone: "Phone is required" } });
-      return;
-    }
-
     const newContact = {
       name,
       email,
