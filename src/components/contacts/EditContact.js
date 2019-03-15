@@ -7,8 +7,7 @@ class EditContact extends Component {
   state = {
     name: "",
     email: "",
-    phone: "",
-    errors: {}
+    phone: ""
   };
 
   async componentDidMount() {
@@ -67,53 +66,37 @@ class EditContact extends Component {
     this.setState({
       name: "",
       email: "",
-      phone: "",
-      errors: {}
+      phone: ""
     });
 
     this.props.history.push("/");
   };
 
   render() {
-    const { name, email, phone, errors } = this.state;
-
     return (
       <Consumer>
         {value => {
           const { dispatch } = value;
           return (
             <div className=" card mb-3">
-              <div className="card-header">Edit Contact</div>
+              <div className="card-header">Add Contact</div>
               <div className="card-body">
                 <form onSubmit={this.onSubmitHandler.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label="Name"
-                    name="name"
-                    placeholder="Enter Name..."
-                    value={name}
-                    onChange={this.onChange}
-                    error={errors.name}
-                  />
-                  <TextInputGroup
-                    label="Email"
-                    name="email"
-                    type="email"
-                    placeholder="Enter Email..."
-                    value={email}
-                    onChange={this.onChange}
-                    error={errors.email}
-                  />
-                  <TextInputGroup
-                    label="Phone"
-                    name="phone"
-                    placeholder="Enter Phone..."
-                    value={phone}
-                    onChange={this.onChange}
-                    error={errors.phone}
-                  />
+                  {Object.keys(this.state).map(key => {
+                    return (
+                      <TextInputGroup
+                        name={key}
+                        val={this.state[key]}
+                        update={this.updateField}
+                        key={key}
+                        onChange={this.onChange}
+                      />
+                    );
+                  })}
+
                   <input
                     type="submit"
-                    value="Edit Contact"
+                    value="Add Contact"
                     className="btn btn-light btn-block"
                   />
                 </form>

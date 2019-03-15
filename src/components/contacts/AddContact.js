@@ -7,8 +7,7 @@ class AddContact extends Component {
   state = {
     name: "",
     email: "",
-    phone: "",
-    errors: {}
+    phone: ""
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -48,16 +47,13 @@ class AddContact extends Component {
     this.setState({
       name: "",
       email: "",
-      phone: "",
-      errors: {}
+      phone: ""
     });
 
     this.props.history.push("/");
   };
 
   render() {
-    const { name, email, phone, errors } = this.state;
-
     return (
       <Consumer>
         {value => {
@@ -67,32 +63,17 @@ class AddContact extends Component {
               <div className="card-header">Add Contact</div>
               <div className="card-body">
                 <form onSubmit={this.onSubmitHandler.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label="Name"
-                    name="name"
-                    placeholder="Enter Name..."
-                    value={name}
-                    onChange={this.onChange}
-                    error={errors.name}
-                  />
-                  <TextInputGroup
-                    label="Email"
-                    name="email"
-                    type="email"
-                    placeholder="Enter Email..."
-                    value={email}
-                    onChange={this.onChange}
-                    error={errors.email}
-                  />
-                  <TextInputGroup
-                    label="Phone"
-                    name="phone"
-                    type="number"
-                    placeholder="Enter Phone..."
-                    value={phone}
-                    onChange={this.onChange}
-                    error={errors.phone}
-                  />
+                  {Object.keys(this.state).map(key => {
+                    return (
+                      <TextInputGroup
+                        name={key}
+                        val={this.state[key]}
+                        key={key}
+                        onChange={this.onChange}
+                      />
+                    );
+                  })}
+
                   <input
                     type="submit"
                     value="Add Contact"
